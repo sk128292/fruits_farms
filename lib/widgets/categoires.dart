@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RecentItem extends StatelessWidget {
-  const RecentItem({Key key}) : super(key: key);
+class CategoriesItem extends StatelessWidget {
+  const CategoriesItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

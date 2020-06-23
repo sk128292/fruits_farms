@@ -14,6 +14,40 @@ class _ViewPageState extends State<ViewPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Fruits Farms"),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Container(
+              // height: 100,
+              width: 40,
+              child: GestureDetector(
+                onTap: null,
+                child: Stack(
+                  children: <Widget>[
+                    IconButton(
+                      padding: EdgeInsets.only(bottom: 5,),
+                      icon: Icon(Icons.shopping_cart, color: Colors.lightGreen[50], size: 25,),
+                      onPressed: (){
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartPage()));
+                      },
+                    ),
+                    // cart.items.length == 0 ? Container() :
+                    Positioned(
+                      left:18,
+                      bottom: 8,
+                      child: CircleAvatar(
+                        radius: 7.0,
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        // child: Text(cart.items.length.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(30.0),
           child: Expanded(
