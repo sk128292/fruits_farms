@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/pages/itemspage.dart';
+import 'package:fruits_farms/widgets/item_list.dart';
 
 class CategoriesItem extends StatelessWidget {
   const CategoriesItem({Key key}) : super(key: key);
@@ -13,25 +15,33 @@ class CategoriesItem extends StatelessWidget {
             img: "assets/a.jpg",
             title: "Apple",
             desc: "",
-            press: (){},
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemPage()));
+            },
           ),
           CategoryItem(
             img: "assets/b.jpg",
             title: "Grapes",
             desc: "",
-            press: (){},
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
+            },
           ),
           CategoryItem(
             img: "assets/c.jpg",
             title: "Lychee",
             desc: "",
-            press: (){},
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
+            },
           ),
           CategoryItem(
             img: "assets/d.jpg",
             title: "Pears",
             desc: "",
-            press: (){},
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
+            },
           ),
         ],
       ),

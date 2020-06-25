@@ -1,10 +1,12 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/pages/category_load_page.dart';
 import 'package:fruits_farms/widgets/ad.dart';
+import 'package:fruits_farms/widgets/apple.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
-import 'package:fruits_farms/widgets/category.dart';
-import 'package:fruits_farms/widgets/category_name.dart';
+import 'package:fruits_farms/widgets/comingsoon.dart';
 import 'package:fruits_farms/widgets/lychee.dart';
+import 'package:fruits_farms/widgets/mango.dart';
 
 enum CategoryName {apple, orange, kinoo, mango, lychee, kiwi}
 
@@ -69,18 +71,23 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Column(
-                            children: <Widget>[
-                              Image(
-                                height: 130,
-                                image: AssetImage('assets/fruits.jpg'),
-                                fit: BoxFit.fill,
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryLoadPage()));
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Image(
+                                  height: 130,
+                                  image: AssetImage('assets/fruits.jpg'),
+                                  fit: BoxFit.fill,
+                                  ),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text("Fruites", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
                                 ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text("Fruites", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -124,9 +131,12 @@ class _HomePageState extends State<HomePage> {
                ),
              ),
              Card(
-               color: Colors.white,
                child: Column(
                  children: <Widget>[
+                   Padding(
+                     padding: EdgeInsets.all(5),
+                     child: Text('What You Need..', textAlign: TextAlign.center, style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold ),),
+                   ),
                    Padding(
                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                      child: Container(
@@ -204,27 +214,45 @@ class _HomePageState extends State<HomePage> {
                    ),
                  ],
                ),
-             ),
-             
+             ),             
              SizedBox(
                height:10,
              ),
-             SizedBox(
-               child: InkWell(
-                 onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (contecx)=>Categories()));
-                 },
-                 child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Image(
-                    height: 200,
-                    width: double.infinity,
-                    image: AssetImage('assets/strawberry.jpg'),
-                    fit: BoxFit.cover,
+             Card(
+                child: Column(
+                 children: <Widget>[
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Text('Dry Fruits', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), ),
+                   ),
+                   InkWell(
+                     onTap: (){
+                       Navigator.push(context, MaterialPageRoute(builder: (contecx)=>ComingSoon()));
+                     },
+                     child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Image(
+                        height: 200,
+                        width: double.infinity,
+                        image: AssetImage('assets/dryfruits.jpg'),
+                        fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              ),
+                 ],
+               ),
+             ),
+             Advertise(),
+             Container(
+               width: double.infinity,
+               height: 60,
+               child: Card(
+                 child: Padding(
+                   padding: const EdgeInsets.only(top: 15.0),
+                   child: Text("Thanking You..", textAlign: TextAlign.center, style: TextStyle(color: Colors.red,fontSize: 20, fontWeight: FontWeight.bold,),),
+                 ),
+               ),
+             ),
            ],
          ),
        ),
@@ -234,22 +262,22 @@ class _HomePageState extends State<HomePage> {
   Widget categoryItemsLoad(){
     switch (_selectedCategory) {
       case CategoryName.apple:
-        return RecentItem();
+        return Lychee();
         break;
       case CategoryName.orange:
-        return RecentItem();
+        return Apple();
         break;
       case CategoryName.kinoo:
-        return RecentItem();
+        return Lychee();
         break;
       case CategoryName.mango:
-        return RecentItem();
+        return Mango();
         break;
       case CategoryName.lychee:
         return Lychee();
         break;
       case CategoryName.kiwi:
-        return RecentItem();
+        return Apple();
         break;
       default:
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Lychee extends StatelessWidget {
-  const Lychee({Key key}) : super(key: key);
+class Mango extends StatelessWidget {
+  const Mango({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,35 +9,35 @@ class Lychee extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: <Widget>[
-          ItemCard(
-            img: "assets/c.jpg",
-            title: "Lychee",
-            price: 1300,
-            qty: 1,
+          CategoryItem(
+            img: "assets/mango.jpg",
+            title: "Mango Malda",
+            price: 100,
+            qty: 2,
             desc: "",
             press: (){},
           ),
-          ItemCard(
-            img: "assets/c.jpg",
-            title: "Lychee",
-            price: 1300,
-            qty: 1,
+          CategoryItem(
+            img: "assets/mango.jpg",
+            title: "Mango Sindura",
+            qty: 2,
+            price: 200,
             desc: "",
             press: (){},
           ),
-          ItemCard(
-            img: "assets/c.jpg",
-            title: "Lychee",
-            price: 1300,
-            qty: 1,
+          CategoryItem(
+            img: "assets/mango.jpg",
+            title: "Mango Dashahri",
+            price: 300,
+            qty: 5,
             desc: "",
             press: (){},
           ),
-          ItemCard(
-            img: "assets/c.jpg",
-            title: "Lychee",
-            price: 1300,
-            qty: 1,
+          CategoryItem(
+            img: "assets/mango.jpg",
+            title: "Mango",
+            price: 400,
+            qty: 5,
             desc: "",
             press: (){},
           ),
@@ -47,12 +47,12 @@ class Lychee extends StatelessWidget {
   }
 }
 
-class ItemCard extends StatelessWidget {
+class CategoryItem extends StatelessWidget {
   final String title, desc, img;
   final Function press;
   final int price, qty;
 
-  const ItemCard({Key key, this.title, this.desc, this.img, this.press, this.price, this.qty}) : super(key: key);
+  const CategoryItem({Key key, this.title, this.desc, this.img, this.press, this.price, this.qty}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class ItemCard extends StatelessWidget {
                         width: 145,
                         height: 150,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(7),
+                          borderRadius: BorderRadius.circular(5),
                           child: Image(
                             image: AssetImage(img),                           
                             fit: BoxFit.cover,

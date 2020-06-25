@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
-        canvasColor: Colors.grey[350]
+        canvasColor: Colors.grey[200],
       ),
       home: ViewPage(),
     );

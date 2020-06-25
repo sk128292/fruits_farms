@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/pages/detailPage.dart';
 
-class Categories extends StatefulWidget {
-  Categories({Key key}) : super(key: key);
+class ItemLists extends StatefulWidget {
+  ItemLists({Key key}) : super(key: key);
 
   @override
-  _CategoriesState createState() => _CategoriesState();
+  _ItemListsState createState() => _ItemListsState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _ItemListsState extends State<ItemLists> {
   
-  final catItems = [
+  final items = [
     {
       "name": "Apple",
-      "img": "assets/apple.jpg",
+      "img": "assets/a.jpg",
       "desc":  "Sandeep",
       "price": 100,
     },
     {
       "name": "Lychee",
-      "img": "assets/lychee.jpg",
+      "img": "assets/b.jpg",
       "desc": "ffghfg",
       "price": 100
     },
@@ -30,7 +31,7 @@ class _CategoriesState extends State<Categories> {
     },
     {
       "name": "Strawberry",
-      "img": "assets/strawberry.jpg",
+      "img": "assets/c.jpg",
       "desc": "ffghfg",
       "price": 100
     },
@@ -55,85 +56,38 @@ class _CategoriesState extends State<Categories> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Categories"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
-          alignment: Alignment.centerLeft,
-          tooltip: "Back",
-          onPressed: (){ Navigator.pop(context);},
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 100,
-              child: Card(
-                color: Colors.orange, 
-                  child: Text("Sandeep"),
-              ),
-            ),
-            Container(
-              child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: catItems.length,
-                itemBuilder: (BuildContext context, int index){
-                  return Category(
-                    catName: catItems[index]['name'],
-                    catImage: catItems[index]['img'],
-                    catPrice: catItems[index]["price"],
-                    catDescription: catItems[index]["desc"],
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+    return Container(
+      child: ListView.builder(
+        shrinkWrap: true,
+        primary: false,
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index){
+          return ItemList(
+            catName: items[index]['name'],
+            catImage: items[index]['img'],
+            catPrice: items[index]["price"],
+            catDescription: items[index]["desc"],
+          );
+        },
       ),
     );
-      
-    
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text("Categories"),
-    //     leading: IconButton(
-    //       icon: Icon(Icons.arrow_back), 
-    //       alignment: Alignment.centerLeft,
-    //       tooltip: "Back",
-    //       onPressed: (){ Navigator.pop(context);},
-    //     ),
-    //   ),
-    //   body:GridView.builder(
-    //   itemCount: cat_items.length,
-    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
-    //   itemBuilder: (BuildContext context, int index){
-    //     return Category(
-    //       cat_name: cat_items[index]['name'],
-    //       cat_img: cat_items[index]['img'],
-    //     );
-    //   },
-    // ),);
-}}
+  }
+}
 
-class Category extends StatefulWidget {
+class ItemList extends StatefulWidget {
 
   final String catName;
   final String catImage;
   final int catPrice;
   final String catDescription;
 
-  Category({this.catName, this.catImage, this.catPrice, this.catDescription});
+  ItemList({this.catName, this.catImage, this.catPrice, this.catDescription});
 
   @override
-  _CategoryState createState() => _CategoryState();
+  _ItemListState createState() => _ItemListState();
 }
 
-class _CategoryState extends State<Category> {
+class _ItemListState extends State<ItemList> {
   bool _isVisible = true;
 
   void showToast(){
@@ -146,18 +100,18 @@ class _CategoryState extends State<Category> {
   Widget build(BuildContext context) {
     return Container(
           padding: EdgeInsets.all(2),
-          height: 155,
+          height: 140,
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child:GestureDetector(
               onTap: (){
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductDetail()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
               },
               child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
-                  width: 145,
+                  width: 125,
                   child: Image.asset(widget.catImage, fit: BoxFit.contain),
                 ),
                 Expanded(
@@ -167,8 +121,7 @@ class _CategoryState extends State<Category> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Text(widget.catName),
-                        Text(widget.catDescription, style:TextStyle(fontWeight: FontWeight.bold)),
+                        Text(widget.catName, style:TextStyle(fontWeight: FontWeight.bold)),
                         // Text("Price: " + this.price.toString()),
                         Row(
                           children: <Widget>[
@@ -216,13 +169,6 @@ class _CategoryState extends State<Category> {
                             ],
                           ),
                         ),
-                        
-                        // OutlineButton(
-                        //   borderSide: BorderSide(color: Colors.green),
-                        //   textColor: Colors.green,
-                        //   child: Text("Add"),
-                        //   onPressed: (){},
-                        // ),
                       ],
                     ),
                   ],
@@ -234,23 +180,5 @@ class _CategoryState extends State<Category> {
        ),
       ),
     );
-    // return Card(
-    //   child: Hero(
-    //     tag: cat_name, 
-    //     child: Material(
-    //       child: InkWell(
-    //         onTap: (){},
-    //         child: GridTile(
-    //           child: Column(
-    //             children: <Widget>[
-    //               Image.asset(cat_img),
-    //               Text(cat_name),
-    //             ],
-    //           )
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
