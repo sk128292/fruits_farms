@@ -1,62 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_farms/pages/itemspage.dart';
-import 'package:fruits_farms/widgets/item_list.dart';
+import 'package:fruits_farms/models/category.dart';
+// import 'package:fruits_farms/models/product.dart';
+// import 'package:fruits_farms/pages/homepage.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesItem extends StatelessWidget {
   const CategoriesItem({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: <Widget>[
-          CategoryItem(
-            img: "assets/a.jpg",
-            title: "Apple",
-            desc: "",
-            press: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemPage()));
-            },
+    final categoryData = Provider.of<Categories>(context, listen: false);
+    final catData = categoryData.items;
+    return Container(
+      height: 162,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        primary: false,
+        itemCount: catData.length,
+        itemBuilder: (context, index) => ChangeNotifierProvider.value(
+          value: catData[index],
+          child: CategoryItem(
+            id: catData[index].id,
+            image: catData[index].image,
+            name: catData[index].name,
+            // press: '',
           ),
-          CategoryItem(
-            img: "assets/b.jpg",
-            title: "Grapes",
-            desc: "",
-            press: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
-            },
-          ),
-          CategoryItem(
-            img: "assets/c.jpg",
-            title: "Lychee",
-            desc: "",
-            press: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
-            },
-          ),
-          CategoryItem(
-            img: "assets/d.jpg",
-            title: "Pears",
-            desc: "",
-            press: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ItemLists()));
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
 class CategoryItem extends StatelessWidget {
-  final String title, desc, img;
-  final Function press;
+  final String id, name, description, grade, image;
+  final int price, qty;
 
-  const CategoryItem({Key key, this.title, this.desc, this.img, this.press}) : super(key: key);
+  const CategoryItem(
+      {Key key,
+      this.id,
+      this.name,
+      this.description,
+      this.grade,
+      this.image,
+      this.price,
+      this.qty})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final prdct = Provider.of<Product>(context, listen: false);
     return Stack(
       children: <Widget>[
         Container(
@@ -76,7 +69,7 @@ class CategoryItem extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: press,
+              onTap: () {},
               child: Padding(
                 padding: EdgeInsets.all(0),
                 child: Column(
@@ -93,7 +86,7 @@ class CategoryItem extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(7),
                         child: Image(
-                          image: AssetImage(img),                           
+                          image: AssetImage(image),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -114,8 +107,14 @@ class CategoryItem extends StatelessWidget {
           child: Card(
             color: Colors.black.withOpacity(0.37),
             child: Padding(
-              padding: const EdgeInsets.only(top:10.0,),
-              child: Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 17),),
+              padding: const EdgeInsets.only(
+                top: 10.0,
+              ),
+              child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 17),
+              ),
             ),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_farms/pages/cart.dart';
+import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
 
 class DetailPage extends StatefulWidget {

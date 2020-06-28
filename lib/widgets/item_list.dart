@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fruits_farms/pages/detailPage.dart';
+import 'package:fruits_farms/pages/detailpage.dart';
 
 class ItemLists extends StatefulWidget {
   ItemLists({Key key}) : super(key: key);
