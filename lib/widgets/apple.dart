@@ -7,7 +7,7 @@ class Apple extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productData = Provider.of<Products>(context);
+    final productData = Provider.of<Products>(context, listen: false);
     final prdcts = productData.items;
     return Container(
       height: 232,

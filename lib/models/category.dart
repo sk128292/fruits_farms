@@ -4,7 +4,7 @@ class Categories with ChangeNotifier {
   List<Category> _items = [
     Category(id: '1', name: 'Apple', image: 'assets/a.jpg'),
     Category(id: '2', name: 'Grapes', image: 'assets/b.jpg'),
-    Category(id: '3', name: 'mango', image: 'assets/mango.jpg'),
+    Category(id: '3', name: 'Mango', image: 'assets/mango.jpg'),
     Category(id: '4', name: 'Lychee', image: 'assets/c.jpg'),
   ];
 

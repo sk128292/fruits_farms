@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
-import 'package:fruits_farms/pages/itemspage.dart';
+import 'package:fruits_farms/pages/fruitspage.dart';
+import 'package:fruits_farms/pages/vegetablepage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
 import 'package:fruits_farms/widgets/apple.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<Product>(context);
     return Container(
       child: SingleChildScrollView(
         child: Column(
@@ -88,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ItemPage()));
+                                      builder: (context) => FruitsPage()));
                             },
                             child: Column(
                               children: <Widget>[
@@ -115,24 +117,32 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Column(
-                            children: <Widget>[
-                              Image(
-                                height: 130,
-                                image: AssetImage('assets/vegetables.jpg'),
-                                fit: BoxFit.fill,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  "Vegitables",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => VegetablePage()));
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Image(
+                                  height: 130,
+                                  image: AssetImage('assets/vegetables.jpg'),
+                                  fit: BoxFit.fill,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Text(
+                                    "Vegitables",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),

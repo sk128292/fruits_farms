@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 
 class Product with ChangeNotifier {
-  final String id, name, description, grade, image;
+  final String id, name, category, description, grade, image;
   final int price, qty;
 
   Product(
       {this.id,
       this.name,
+      this.category,
       this.description,
       this.grade,
       this.image,
@@ -19,6 +20,7 @@ class Products with ChangeNotifier {
     Product(
       id: '1',
       name: 'Apple',
+      category: 'fruits',
       description: 'Apple is good for helth',
       grade: 'Grade A',
       image: 'assets/apple.jpg',
@@ -27,6 +29,7 @@ class Products with ChangeNotifier {
     ),
     Product(
       id: '2',
+      category: 'fruits',
       name: 'Grapes',
       description: 'Grapes is good for helth',
       grade: 'Grade A',
@@ -37,6 +40,7 @@ class Products with ChangeNotifier {
     Product(
       id: '3',
       name: 'Lychee',
+      category: 'fruits',
       description: 'Lychee is good for helth',
       grade: 'Grade B',
       image: 'assets/lychee.jpg',
@@ -51,5 +55,13 @@ class Products with ChangeNotifier {
 
   Product findById(String id) {
     return _items.firstWhere((product) => product.id == id);
+  }
+
+  List<Product> get findFruits {
+    return _items.where((fruit) => fruit.category == 'fruits').toList();
+  }
+
+  List<Product> get findVegitable {
+    return _items.where((veg) => veg.category == 'vegetable').toList();
   }
 }

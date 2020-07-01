@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_farms/models/category.dart';
-// import 'package:fruits_farms/models/product.dart';
-// import 'package:fruits_farms/pages/homepage.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesItem extends StatelessWidget {
@@ -9,8 +7,9 @@ class CategoriesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryData = Provider.of<Categories>(context, listen: false);
+    final categoryData = Provider.of<Categories>(context);
     final catData = categoryData.items;
+    // final cat = categoryData.items;
     return Container(
       height: 162,
       child: ListView.builder(
@@ -24,7 +23,6 @@ class CategoriesItem extends StatelessWidget {
             id: catData[index].id,
             image: catData[index].image,
             name: catData[index].name,
-            // press: '',
           ),
         ),
       ),

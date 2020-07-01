@@ -8,18 +8,18 @@ class ComingSoon extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Dry Fruits..'),
+        title: Text('Fruit Farms..'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
+          icon: Icon(Icons.arrow_back),
           alignment: Alignment.centerLeft,
           tooltip: "Back",
-          onPressed: (){ Navigator.pop(context);},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Center(
-        child: Image(
-          image: AssetImage('assets/commingsoon.png')
-        ),
+        child: Image(image: AssetImage('assets/commingsoon.png')),
       ),
     );
   }

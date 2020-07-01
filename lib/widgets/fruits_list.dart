@@ -3,25 +3,25 @@ import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:provider/provider.dart';
 
-class ItemLists extends StatefulWidget {
-  ItemLists({Key key}) : super(key: key);
+class FruitsList extends StatefulWidget {
+  FruitsList({Key key}) : super(key: key);
 
   @override
-  _ItemListsState createState() => _ItemListsState();
+  _FruitsListState createState() => _FruitsListState();
 }
 
-class _ItemListsState extends State<ItemLists> {
+class _FruitsListState extends State<FruitsList> {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context, listen: false);
-    final proData = productData.items;
+    final proData = productData.findFruits;
     return Container(
       child: ListView.builder(
         shrinkWrap: true,
         primary: false,
         itemCount: proData.length,
         itemBuilder: (BuildContext context, int index) {
-          return ItemList(
+          return FruitList(
             id: proData[index].id,
             name: proData[index].name,
             category: proData[index].category,
@@ -36,11 +36,11 @@ class _ItemListsState extends State<ItemLists> {
   }
 }
 
-class ItemList extends StatefulWidget {
+class FruitList extends StatefulWidget {
   final String id, name, category, description, grade, image;
   final int price, qty;
 
-  ItemList(
+  FruitList(
       {this.id,
       this.name,
       this.category,
@@ -51,10 +51,10 @@ class ItemList extends StatefulWidget {
       this.qty});
 
   @override
-  _ItemListState createState() => _ItemListState();
+  _FruitListState createState() => _FruitListState();
 }
 
-class _ItemListState extends State<ItemList> {
+class _FruitListState extends State<FruitList> {
   bool _isVisible = true;
 
   void showToast() {
