@@ -1,47 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_farms/models/product.dart';
+import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:provider/provider.dart';
 
-class Apple extends StatelessWidget {
-  const Apple({Key key}) : super(key: key);
+class Mango extends StatelessWidget {
+  const Mango({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context, listen: false);
-    final prdcts = productData.items;
+    final prdcts = productData.findMango;
     return Container(
-      height: 232,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        primary: false,
-        itemCount: prdcts.length,
-        itemBuilder: (context, index) => ChangeNotifierProvider.value(
-          value: prdcts[index],
-          child: CategoryItem(
-            id: prdcts[index].id,
-            name: prdcts[index].name,
-            image: prdcts[index].image,
-            price: prdcts[index].price,
-            qty: prdcts[index].qty,
-            grade: prdcts[index].grade,
-          ),
-        ),
-      ),
+      height: 237,
+      child: prdcts.length != 0
+          ? ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              primary: false,
+              itemCount: prdcts.length,
+              itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                value: prdcts[index],
+                child: CategoryItem(
+                  id: prdcts[index].id,
+                  name: prdcts[index].name,
+                  image: prdcts[index].image,
+                  price: prdcts[index].price,
+                  qty: prdcts[index].qty,
+                  type: prdcts[index].type,
+                ),
+              ),
+            )
+          : Center(
+              child: Image(
+                height: 230,
+                image: AssetImage('assets/commingsoon.png'),
+              ),
+            ),
     );
   }
 }
 
 class CategoryItem extends StatelessWidget {
-  final String id, name, description, grade, image;
-  final int price, qty;
+  final String id, name, description, type, image;
+  final int qty, price;
 
   const CategoryItem(
       {Key key,
       this.id,
       this.name,
       this.description,
-      this.grade,
+      this.type,
       this.image,
       this.price,
       this.qty})
@@ -59,7 +67,10 @@ class CategoryItem extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(DetailPage.routeName, arguments: id);
+                },
                 child: Padding(
                   padding: EdgeInsets.all(0),
                   child: Column(
@@ -85,7 +96,7 @@ class CategoryItem extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  Text(qty.toString() + ' box'),
+                                  Text(qty.toString()),
                                   Text("Rs. " + price.toString(),
                                       style: TextStyle(
                                           color: Colors.red, fontSize: 15)),
@@ -122,7 +133,7 @@ class CategoryItem extends StatelessWidget {
                 top: 5.0,
               ),
               child: Text(
-                name,
+                type,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),

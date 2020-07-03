@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/models/category.dart';
 import 'package:fruits_farms/models/product.dart';
+import 'package:fruits_farms/pages/cartpage.dart';
+import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:fruits_farms/pages/view_page.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Products()),
         ChangeNotifierProvider(create: (context) => Categories()),
+        ChangeNotifierProvider(create: (context) => Cart()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -21,6 +25,10 @@ class MyApp extends StatelessWidget {
           canvasColor: Colors.grey[200],
         ),
         home: ViewPage(),
+        routes: {
+          DetailPage.routeName: (ctx) => DetailPage(),
+          CartPage.routeName: (ctx) => CartPage(),
+        },
       ),
     );
   }

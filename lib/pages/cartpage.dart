@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/widgets/cart_items.dart';
 
 class CartPage extends StatefulWidget {
+  static const routeName = "/cart";
   CartPage({Key key}) : super(key: key);
 
   @override
@@ -11,19 +13,20 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: Text('Cart Details'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
+          icon: Icon(Icons.arrow_back),
           alignment: Alignment.centerLeft,
           tooltip: "Back",
-          onPressed: (){ Navigator.pop(context);},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
-  
       bottomNavigationBar: Container(
         child: Padding(
-          padding: const EdgeInsets.only(left:5, right: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -32,15 +35,18 @@ class _CartPageState extends State<CartPage> {
               Expanded(
                 child: MaterialButton(
                   color: Colors.orange[500],
-                  onPressed: (){},
-                  child: Text("Checkout", style: TextStyle(color:Colors.white),),
+                  onPressed: () {},
+                  child: Text(
+                    "Checkout",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],
           ),
         ),
       ),
-
+      body: CartItems(),
     );
   }
 }

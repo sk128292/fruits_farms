@@ -19,6 +19,7 @@ class Categories with ChangeNotifier {
 
 class Category with ChangeNotifier {
   final String id, name, image;
+  // final Function press;
 
   Category({this.id, this.name, this.image});
 }

@@ -3,25 +3,25 @@ import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:provider/provider.dart';
 
-class VegetablesList extends StatefulWidget {
-  VegetablesList({Key key}) : super(key: key);
+class ApplesList extends StatefulWidget {
+  ApplesList({Key key}) : super(key: key);
 
   @override
-  _VegetablesListState createState() => _VegetablesListState();
+  _ApplesListState createState() => _ApplesListState();
 }
 
-class _VegetablesListState extends State<VegetablesList> {
+class _ApplesListState extends State<ApplesList> {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context, listen: false);
-    final proData = productData.findVegitable;
+    final proData = productData.findApple;
     return Container(
       child: ListView.builder(
         shrinkWrap: true,
         primary: false,
         itemCount: proData.length,
         itemBuilder: (BuildContext context, int index) {
-          return VegetableList(
+          return AppleList(
             id: proData[index].id,
             name: proData[index].name,
             category: proData[index].category,
@@ -36,11 +36,11 @@ class _VegetablesListState extends State<VegetablesList> {
   }
 }
 
-class VegetableList extends StatefulWidget {
+class AppleList extends StatefulWidget {
   final String id, name, category, description, grade, image;
-  final int price, qty;
+  final int qty, price;
 
-  VegetableList(
+  AppleList(
       {this.id,
       this.name,
       this.category,
@@ -51,10 +51,10 @@ class VegetableList extends StatefulWidget {
       this.qty});
 
   @override
-  _VegetableListState createState() => _VegetableListState();
+  _AppleListState createState() => _AppleListState();
 }
 
-class _VegetableListState extends State<VegetableList> {
+class _AppleListState extends State<AppleList> {
   bool _isVisible = true;
 
   void showToast() {
@@ -72,8 +72,8 @@ class _VegetableListState extends State<VegetableList> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => DetailPage()));
+            Navigator.of(context)
+                .pushNamed(DetailPage.routeName, arguments: widget.id);
           },
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,

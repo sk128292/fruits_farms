@@ -38,7 +38,7 @@ class _FruitsListState extends State<FruitsList> {
 
 class FruitList extends StatefulWidget {
   final String id, name, category, description, grade, image;
-  final int price, qty;
+  final int qty, price;
 
   FruitList(
       {this.id,
@@ -72,8 +72,8 @@ class _FruitListState extends State<FruitList> {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => DetailPage()));
+            Navigator.of(context)
+                .pushNamed(DetailPage.routeName, arguments: widget.id);
           },
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
-import 'package:fruits_farms/widgets/item_list.dart';
+import 'package:fruits_farms/widgets/secondpage/item_list.dart';
 
 class ItemPage extends StatefulWidget {
   ItemPage({Key key}) : super(key: key);
@@ -18,10 +18,12 @@ class _ItemPageState extends State<ItemPage> {
       appBar: AppBar(
         title: Text("Fruits Farms"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back), 
+          icon: Icon(Icons.arrow_back),
           alignment: Alignment.centerLeft,
           tooltip: "Back",
-          onPressed: (){ Navigator.pop(context);},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: <Widget>[
           Padding(
@@ -34,15 +36,22 @@ class _ItemPageState extends State<ItemPage> {
                 child: Stack(
                   children: <Widget>[
                     IconButton(
-                      padding: EdgeInsets.only(bottom: 5,),
-                      icon: Icon(Icons.shopping_cart, color: Colors.lightGreen[50], size: 25,),
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartPage()));
+                      padding: EdgeInsets.only(
+                        bottom: 5,
+                      ),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.lightGreen[50],
+                        size: 25,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CartPage()));
                       },
                     ),
                     // cart.items.length == 0 ? Container() :
                     Positioned(
-                      left:18,
+                      left: 18,
                       bottom: 8,
                       child: CircleAvatar(
                         radius: 7.0,
@@ -83,40 +92,53 @@ class _ItemPageState extends State<ItemPage> {
             Advertise(),
             ItemLists(),
             Padding(
-               padding: const EdgeInsets.only(top: 10, bottom: 10),
-               child: Column(
-                 children: <Widget>[
-                   Text("Recomended for You..", textAlign: TextAlign.center, style: TextStyle(fontSize: 22, color: Colors.black, fontWeight: FontWeight.bold ),),
-                   CategoriesItem(),
-                 ],
-               ),
-             ),
-             Padding(
-               padding: const EdgeInsets.all(5.0),
-               child: Container(
-                 height: 170,
-                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                      image: AssetImage("assets/a.jpg"),
-                      fit: BoxFit.fill
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "Recomended for You..",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  CategoriesItem(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                height: 170,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                      image: AssetImage("assets/a.jpg"), fit: BoxFit.fill),
+                ),
+                child: InkWell(
+                  onTap: () {},
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 60,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Text(
+                    "Thanking You..",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                 child: InkWell(
-                   onTap: (){},
-                 ),
-               ),
-             ),
-             Container(
-               width: double.infinity,
-               height: 60,
-               child: Card(
-                 child: Padding(
-                   padding: const EdgeInsets.only(top: 15.0),
-                   child: Text("Thanking You..", textAlign: TextAlign.center, style: TextStyle(color: Colors.red,fontSize: 20, fontWeight: FontWeight.bold,),),
-                 ),
-               ),
-             ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

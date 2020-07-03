@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:fruits_farms/pages/fruitspage.dart';
 import 'package:fruits_farms/pages/vegetablepage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
-import 'package:fruits_farms/widgets/apple.dart';
+import 'package:fruits_farms/widgets/homepage/apple.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
 import 'package:fruits_farms/widgets/comingsoon.dart';
-import 'package:fruits_farms/widgets/lychee.dart';
-import 'package:fruits_farms/widgets/mango.dart';
+import 'package:fruits_farms/widgets/homepage/mango.dart';
 
-enum CategoryName { apple, orange, kinoo, mango, lychee, kiwi }
+enum CategoryName {
+  apple,
+  orange,
+  mango,
+}
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -190,6 +193,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                             child: MaterialButton(
+                              minWidth: 150,
                               onPressed: () {
                                 setState(() =>
                                     _selectedCategory = CategoryName.apple);
@@ -203,6 +207,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                             child: MaterialButton(
+                              minWidth: 150,
                               onPressed: () {
                                 setState(() =>
                                     _selectedCategory = CategoryName.orange);
@@ -216,51 +221,13 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                             child: MaterialButton(
-                              onPressed: () {
-                                setState(() =>
-                                    _selectedCategory = CategoryName.kinoo);
-                              },
-                              child: Text('Kinoo'),
-                              color: _selectedCategory == CategoryName.kinoo
-                                  ? (Colors.red)
-                                  : (Colors.grey),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                            child: MaterialButton(
+                              minWidth: 150,
                               onPressed: () {
                                 setState(() =>
                                     _selectedCategory = CategoryName.mango);
                               },
                               child: Text('Mango'),
                               color: _selectedCategory == CategoryName.mango
-                                  ? (Colors.red)
-                                  : (Colors.grey),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                            child: MaterialButton(
-                              onPressed: () {
-                                setState(() =>
-                                    _selectedCategory = CategoryName.lychee);
-                              },
-                              child: Text('Lychee'),
-                              color: _selectedCategory == CategoryName.lychee
-                                  ? (Colors.red)
-                                  : (Colors.grey),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                            child: MaterialButton(
-                              onPressed: () {
-                                setState(() =>
-                                    _selectedCategory = CategoryName.kiwi);
-                              },
-                              child: Text('Kiwi'),
-                              color: _selectedCategory == CategoryName.kiwi
                                   ? (Colors.red)
                                   : (Colors.grey),
                             ),
@@ -339,22 +306,13 @@ class _HomePageState extends State<HomePage> {
   Widget categoryItemsLoad() {
     switch (_selectedCategory) {
       case CategoryName.apple:
-        return Lychee();
-        break;
-      case CategoryName.orange:
         return Apple();
         break;
-      case CategoryName.kinoo:
-        return Lychee();
+      case CategoryName.orange:
+        return Mango();
         break;
       case CategoryName.mango:
         return Mango();
-        break;
-      case CategoryName.lychee:
-        return Lychee();
-        break;
-      case CategoryName.kiwi:
-        return Apple();
         break;
       default:
     }

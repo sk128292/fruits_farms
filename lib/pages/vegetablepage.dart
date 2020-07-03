@@ -4,8 +4,7 @@ import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
 import 'package:fruits_farms/widgets/comingsoon.dart';
-// import 'package:fruits_farms/widgets/item_list.dart';
-import 'package:fruits_farms/widgets/vegetable_list.dart';
+import 'package:fruits_farms/widgets/secondpage/vegetable_list.dart';
 import 'package:provider/provider.dart';
 
 class VegetablePage extends StatefulWidget {

@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 
 class Product with ChangeNotifier {
-  final String id, name, category, description, grade, image;
+  final String id, name, category, description, type, image;
   final int price, qty;
+  int unit = 1;
 
   Product(
       {this.id,
       this.name,
       this.category,
       this.description,
-      this.grade,
+      this.type,
       this.image,
       this.price,
       this.qty});
@@ -22,7 +23,7 @@ class Products with ChangeNotifier {
       name: 'Apple',
       category: 'fruits',
       description: 'Apple is good for helth',
-      grade: 'Grade A',
+      type: 'Grade A',
       image: 'assets/apple.jpg',
       price: 50,
       qty: 20,
@@ -30,19 +31,19 @@ class Products with ChangeNotifier {
     Product(
       id: '2',
       category: 'fruits',
-      name: 'Grapes',
+      name: 'Apple',
       description: 'Grapes is good for helth',
-      grade: 'Grade A',
+      type: 'Kashmir Apple -- A ',
       image: 'assets/grapes.jpg',
       price: 50,
       qty: 20,
     ),
     Product(
       id: '3',
-      name: 'Lychee',
+      name: 'Apple',
       category: 'fruits',
       description: 'Lychee is good for helth',
-      grade: 'Grade B',
+      type: 'Grade B',
       image: 'assets/lychee.jpg',
       price: 50,
       qty: 20,
@@ -63,5 +64,21 @@ class Products with ChangeNotifier {
 
   List<Product> get findVegitable {
     return _items.where((veg) => veg.category == 'vegetable').toList();
+  }
+
+  List<Product> get findApple {
+    return _items.where((fruit) => fruit.name == 'Apple').toList();
+  }
+
+  List<Product> get findMango {
+    return _items.where((fruit) => fruit.name == 'mango').toList();
+  }
+}
+
+class ProductChange with ChangeNotifier {
+  Map<String, Product> _items = {};
+
+  Map<String, Product> get items {
+    return {..._items};
   }
 }
