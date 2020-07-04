@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
@@ -14,11 +15,14 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedPrdct = Provider.of<Products>(context).findById(productId);
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Fruits Farms"),
         leading: IconButton(
@@ -53,17 +57,22 @@ class _DetailPageState extends State<DetailPage> {
                             builder: (context) => CartPage()));
                       },
                     ),
-                    // cart.items.length == 0 ? Container() :
-                    Positioned(
-                      left: 18,
-                      bottom: 8,
-                      child: CircleAvatar(
-                        radius: 7.0,
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        // child: Text(cart.items.length.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                      ),
-                    ),
+                    cart.items.length == 0
+                        ? Container()
+                        : Positioned(
+                            left: 18,
+                            bottom: 8,
+                            child: CircleAvatar(
+                              radius: 7.0,
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              child: Text(
+                                cart.items.length.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -143,7 +152,7 @@ class _DetailPageState extends State<DetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            loadedPrdct.qty.toString(),
+                            loadedPrdct.unit,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -154,26 +163,33 @@ class _DetailPageState extends State<DetailPage> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ),
-                          // if (cart.items.containsKey(loadedPrdct.id))
-                          // MaterialButton(
-                          //   color: Colors.red[400],
-                          //   onPressed: () {
-                          //     // cart.removeItem(loadedPrdct.id);
-                          //     // _displayRemoveSnackBar(context);
-                          //   },
-                          //   child: Text("Remove",
-                          //       style: TextStyle(color: Colors.white)),
-                          // )
-                          // else
-                          MaterialButton(
-                            color: Colors.lightGreen,
-                            onPressed: () {
-                              // cart.addItem(loadedPrdct.id, loadedPrdct.name, loadedPrdct.price, loadedPrdct.image, loadedPrdct.qty);
+                          if (cart.items.containsKey(loadedPrdct.id))
+                            MaterialButton(
+                              color: Colors.red[400],
+                              onPressed: () {
+                                cart.removeItem(loadedPrdct.id);
+                                _displayRemoveSnackBar(context);
+                              },
+                              child: Text("Remove",
+                                  style: TextStyle(color: Colors.white)),
+                            )
+                          else
+                            MaterialButton(
+                              color: Colors.lightGreen,
+                              onPressed: () {
+                                cart.addItem(
+                                    loadedPrdct.id,
+                                    loadedPrdct.name,
+                                    loadedPrdct.price,
+                                    loadedPrdct.image,
+                                    loadedPrdct.type,
+                                    loadedPrdct.unit,
+                                    loadedPrdct.qty);
 
-                              // _displayAddSnackBar(context);
-                            },
-                            child: Text("Add To Cart"),
-                          ),
+                                _displayAddSnackBar(context);
+                              },
+                              child: Text("Add To Cart"),
+                            ),
                         ],
                       ),
                     ),
@@ -211,5 +227,21 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
+  }
+
+  _displayAddSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Item Added to cart'),
+      duration: Duration(seconds: 1),
+    );
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+  }
+
+  _displayRemoveSnackBar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Item Removed from cart'),
+      duration: Duration(seconds: 1),
+    );
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/pages/homepage.dart';
+import 'package:provider/provider.dart';
 
 class ViewPage extends StatefulWidget {
   ViewPage({Key key}) : super(key: key);
@@ -12,6 +14,7 @@ class ViewPage extends StatefulWidget {
 class _ViewPageState extends State<ViewPage> {
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Fruits Farms"),
@@ -26,23 +29,35 @@ class _ViewPageState extends State<ViewPage> {
                 child: Stack(
                   children: <Widget>[
                     IconButton(
-                      padding: EdgeInsets.only(bottom: 5,),
-                      icon: Icon(Icons.shopping_cart, color: Colors.lightGreen[50], size: 25,),
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartPage()));
+                      padding: EdgeInsets.only(
+                        bottom: 5,
+                      ),
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.lightGreen[50],
+                        size: 25,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CartPage()));
                       },
                     ),
-                    // cart.items.length == 0 ? Container() :
-                    Positioned(
-                      left:18,
-                      bottom: 8,
-                      child: CircleAvatar(
-                        radius: 7.0,
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        // child: Text(cart.items.length.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                      ),
-                    ),
+                    cart.items.length == 0
+                        ? Container()
+                        : Positioned(
+                            left: 18,
+                            bottom: 8,
+                            child: CircleAvatar(
+                              radius: 7.0,
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              child: Text(
+                                cart.items.length.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -68,10 +83,9 @@ class _ViewPageState extends State<ViewPage> {
           ),
         ),
       ),
-      
       drawer: Drawer(
         child: ListView(
-          children:<Widget>[
+          children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text("Sandeep Kumar"),
               accountEmail: Text("sk128292@gmail.com"),
@@ -93,20 +107,17 @@ class _ViewPageState extends State<ViewPage> {
             ListTile(
               title: Text('About Us'),
               leading: Icon(Icons.book),
-              onTap: (){
-              },
+              onTap: () {},
             ),
             ListTile(
               title: Text('Help'),
               leading: Icon(Icons.help),
-              onTap: (){
-              },
+              onTap: () {},
             ),
             ListTile(
               title: Text('Login'),
               leading: Icon(Icons.settings_power),
-              onTap: (){
-              },
+              onTap: () {},
             ),
           ],
         ),

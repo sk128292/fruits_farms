@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
 import 'package:fruits_farms/widgets/categoires.dart';
 import 'package:fruits_farms/widgets/secondpage/item_list.dart';
+import 'package:provider/provider.dart';
 
 class ItemPage extends StatefulWidget {
   ItemPage({Key key}) : super(key: key);
@@ -14,6 +16,7 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Fruits Farms"),
@@ -49,17 +52,22 @@ class _ItemPageState extends State<ItemPage> {
                             builder: (context) => CartPage()));
                       },
                     ),
-                    // cart.items.length == 0 ? Container() :
-                    Positioned(
-                      left: 18,
-                      bottom: 8,
-                      child: CircleAvatar(
-                        radius: 7.0,
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        // child: Text(cart.items.length.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                      ),
-                    ),
+                    cart.items.length == 0
+                        ? Container()
+                        : Positioned(
+                            left: 18,
+                            bottom: 8,
+                            child: CircleAvatar(
+                              radius: 7.0,
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              child: Text(
+                                cart.items.length.toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),

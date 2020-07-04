@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
@@ -19,6 +20,7 @@ class _FruitsPageState extends State<FruitsPage> {
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context, listen: false);
     final proData = productData.findFruits;
+    final cart = Provider.of<Cart>(context);
     return proData.length != 0
         ? Scaffold(
             appBar: AppBar(
@@ -55,17 +57,23 @@ class _FruitsPageState extends State<FruitsPage> {
                                   builder: (context) => CartPage()));
                             },
                           ),
-                          // cart.items.length == 0 ? Container() :
-                          Positioned(
-                            left: 18,
-                            bottom: 8,
-                            child: CircleAvatar(
-                              radius: 7.0,
-                              backgroundColor: Colors.red,
-                              foregroundColor: Colors.white,
-                              // child: Text(cart.items.length.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                            ),
-                          ),
+                          cart.items.length == 0
+                              ? Container()
+                              : Positioned(
+                                  left: 18,
+                                  bottom: 8,
+                                  child: CircleAvatar(
+                                    radius: 7.0,
+                                    backgroundColor: Colors.red,
+                                    foregroundColor: Colors.white,
+                                    child: Text(
+                                      cart.items.length.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                  ),
+                                ),
                         ],
                       ),
                     ),

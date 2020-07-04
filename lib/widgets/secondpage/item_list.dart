@@ -110,23 +110,12 @@ class _ItemListState extends State<ItemList> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "Mrp: " + widget.price.toString(),
-                                style: TextStyle(
-                                    decoration: TextDecoration.lineThrough,
-                                    color: Colors.red,
-                                    fontSize: 13),
-                              ),
-                              Text(
-                                "Price: " +
-                                    (widget.price - (widget.price / 10))
-                                        .toString(),
-                                style: TextStyle(
-                                    color: Colors.green, fontSize: 15),
-                              )
-                            ],
+                          Text(
+                            "Mrp: " + widget.price.toString(),
+                            style: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.red,
+                                fontSize: 13),
                           ),
                           Visibility(
                             visible: _isVisible,

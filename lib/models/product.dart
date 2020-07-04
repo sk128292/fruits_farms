@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 class Product with ChangeNotifier {
-  final String id, name, category, description, type, image;
+  final String id, name, category, description, type, image, unit;
   final int price, qty;
-  int unit = 1;
 
   Product(
       {this.id,
@@ -12,6 +11,7 @@ class Product with ChangeNotifier {
       this.description,
       this.type,
       this.image,
+      this.unit,
       this.price,
       this.qty});
 }
@@ -25,8 +25,9 @@ class Products with ChangeNotifier {
       description: 'Apple is good for helth',
       type: 'Grade A',
       image: 'assets/apple.jpg',
-      price: 50,
-      qty: 20,
+      unit: '20 kg',
+      price: 50000,
+      qty: 1,
     ),
     Product(
       id: '2',
@@ -35,8 +36,9 @@ class Products with ChangeNotifier {
       description: 'Grapes is good for helth',
       type: 'Kashmir Apple -- A ',
       image: 'assets/grapes.jpg',
+      unit: '12 kg',
       price: 50,
-      qty: 20,
+      qty: 1,
     ),
     Product(
       id: '3',
@@ -45,8 +47,9 @@ class Products with ChangeNotifier {
       description: 'Lychee is good for helth',
       type: 'Grade B',
       image: 'assets/lychee.jpg',
+      unit: '5 kg',
       price: 50,
-      qty: 20,
+      qty: 1,
     ),
   ];
 

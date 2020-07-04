@@ -25,6 +25,7 @@ class Apple extends StatelessWidget {
                   id: prdcts[index].id,
                   name: prdcts[index].name,
                   image: prdcts[index].image,
+                  unit: prdcts[index].unit,
                   price: prdcts[index].price,
                   qty: prdcts[index].qty,
                   type: prdcts[index].type,
@@ -42,7 +43,7 @@ class Apple extends StatelessWidget {
 }
 
 class CategoryItem extends StatelessWidget {
-  final String id, name, description, type, image;
+  final String id, name, description, type, image, unit;
   final int qty, price;
 
   const CategoryItem(
@@ -52,6 +53,7 @@ class CategoryItem extends StatelessWidget {
       this.description,
       this.type,
       this.image,
+      this.unit,
       this.price,
       this.qty})
       : super(key: key);
@@ -99,26 +101,49 @@ class CategoryItem extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  Text(qty.toString()),
+                                  Text(unit),
                                   Text("Rs. " + price.toString(),
                                       style: TextStyle(
                                           color: Colors.red, fontSize: 15)),
                                 ],
                               ),
                               // Divider(color:Colors.red,),
-                              MaterialButton(
-                                minWidth: 145,
-                                color: Colors.lightGreen,
-                                onPressed: () {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    duration: Duration(seconds: 1),
-                                    content: Text('Item Added to Cart'),
-                                  ));
-                                  cart.addItem(prdcts.id, prdcts.name,
-                                      prdcts.price, prdcts.image, prdcts.qty);
-                                },
-                                child: Text('Add'),
-                              ),
+                              if (cart.items.containsKey(prdcts.id))
+                                MaterialButton(
+                                  minWidth: 145,
+                                  color: Colors.red[400],
+                                  onPressed: () {
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      duration: Duration(seconds: 1),
+                                      content: Text('Item Removed from Cart'),
+                                    ));
+                                    cart.removeItem(prdcts.id);
+                                  },
+                                  child: Text(
+                                    "Remove",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              else
+                                MaterialButton(
+                                  minWidth: 145,
+                                  color: Colors.lightGreen,
+                                  onPressed: () {
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      duration: Duration(seconds: 1),
+                                      content: Text('Item Added to Cart'),
+                                    ));
+                                    cart.addItem(
+                                        prdcts.id,
+                                        prdcts.name,
+                                        prdcts.price,
+                                        prdcts.image,
+                                        prdcts.type,
+                                        prdcts.unit,
+                                        prdcts.qty);
+                                  },
+                                  child: Text('Add'),
+                                ),
                             ],
                           ),
                         ),

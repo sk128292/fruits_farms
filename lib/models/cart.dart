@@ -1,12 +1,18 @@
 import 'package:flutter/foundation.dart';
 
 class CartItem {
-  final String id, name, image, description;
-  final int price;
-  final int qty;
+  final String id, name, image, description, unit, type;
+  final int price, qty;
 
   CartItem(
-      {this.id, this.name, this.image, this.description, this.price, this.qty});
+      {this.id,
+      this.name,
+      this.image,
+      this.description,
+      this.unit,
+      this.type,
+      this.price,
+      this.qty});
 }
 
 class Cart with ChangeNotifier {
@@ -20,16 +26,27 @@ class Cart with ChangeNotifier {
     return _items.length;
   }
 
-  void addItem(String id, String name, int price, String image, int qty) {
+  double get totalAmount {
+    var total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.qty;
+    });
+    return total;
+  }
+
+  void addItem(String id, String name, int price, String image, String type,
+      String unit, int qty) {
     if (_items.containsKey(id)) {
       _items.update(
           id,
           (existingCartItem) => CartItem(
                 id: existingCartItem.id,
                 name: existingCartItem.name,
-                qty: existingCartItem.qty + qty,
+                unit: existingCartItem.unit,
+                qty: existingCartItem.qty + 1,
                 image: existingCartItem.image,
-                price: existingCartItem.price + price,
+                type: existingCartItem.type,
+                price: existingCartItem.price,
               ));
     } else {
       _items.putIfAbsent(
@@ -37,9 +54,11 @@ class Cart with ChangeNotifier {
           () => CartItem(
                 name: name,
                 id: id,
+                unit: unit,
                 qty: qty,
                 price: price,
                 image: image,
+                type: type,
               ));
     }
     notifyListeners();
@@ -61,8 +80,10 @@ class Cart with ChangeNotifier {
           id: existingCartItem.id,
           name: existingCartItem.name,
           qty: existingCartItem.qty - 1,
-          price: existingCartItem.price - price,
+          price: existingCartItem.price,
           image: existingCartItem.image,
+          unit: existingCartItem.unit,
+          type: existingCartItem.type,
         ),
       );
     }

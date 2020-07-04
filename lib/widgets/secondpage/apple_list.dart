@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _ApplesListState extends State<ApplesList> {
           return AppleList(
             id: proData[index].id,
             name: proData[index].name,
-            category: proData[index].category,
+            type: proData[index].type,
             image: proData[index].image,
             price: proData[index].price,
             description: proData[index].description,
@@ -37,34 +38,30 @@ class _ApplesListState extends State<ApplesList> {
 }
 
 class AppleList extends StatefulWidget {
-  final String id, name, category, description, grade, image;
+  final String id, name, description, type, image, unit;
   final int qty, price;
 
   AppleList(
-      {this.id,
+      {Key key,
+      this.id,
       this.name,
-      this.category,
       this.description,
-      this.grade,
+      this.type,
       this.image,
+      this.unit,
       this.price,
-      this.qty});
+      this.qty})
+      : super(key: key);
 
   @override
   _AppleListState createState() => _AppleListState();
 }
 
 class _AppleListState extends State<AppleList> {
-  bool _isVisible = true;
-
-  void showToast() {
-    setState(() {
-      _isVisible = !_isVisible;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final prdcts = Provider.of<Product>(context);
+    final cart = Provider.of<Cart>(context);
     return Container(
       padding: EdgeInsets.all(2),
       height: 140,
@@ -120,42 +117,48 @@ class _AppleListState extends State<AppleList> {
                                     fontSize: 13),
                               ),
                               Text(
-                                "Price: " +
-                                    (widget.price - (widget.price / 10))
-                                        .toString(),
+                                "Price: " + (widget.price.toString()),
                                 style: TextStyle(
                                     color: Colors.green, fontSize: 15),
                               )
                             ],
                           ),
-                          Visibility(
-                            visible: _isVisible,
-                            child: OutlineButton(
-                              borderSide: BorderSide(color: Colors.green),
-                              textColor: Colors.green,
-                              child: Text("Add"),
-                              onPressed: showToast,
+                          if (cart.items.containsKey(prdcts.id))
+                            MaterialButton(
+                              minWidth: 145,
+                              color: Colors.red[400],
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  content: Text('Item Removed from Cart'),
+                                ));
+                                cart.removeItem(prdcts.id);
+                              },
+                              child: Text(
+                                "Remove",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          else
+                            MaterialButton(
+                              minWidth: 145,
+                              color: Colors.lightGreen,
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  content: Text('Item Added to Cart'),
+                                ));
+                                cart.addItem(
+                                    prdcts.id,
+                                    prdcts.name,
+                                    prdcts.price,
+                                    prdcts.image,
+                                    prdcts.type,
+                                    prdcts.unit,
+                                    prdcts.qty);
+                              },
+                              child: Text('Add'),
                             ),
-                            replacement: Row(
-                              children: <Widget>[
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.remove_circle,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: null,
-                                ),
-                                Text("1"),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.add_circle,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: null,
-                                )
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ],
