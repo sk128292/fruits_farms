@@ -64,24 +64,24 @@ class _ViewPageState extends State<ViewPage> {
             ),
           ),
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30.0),
-          child: Expanded(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(5),
-                  prefixIcon: Icon(Icons.search),
-                  hintText: "Search here...",
-                  border: OutlineInputBorder(),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
+        // bottom: PreferredSize(
+        //   preferredSize: Size.fromHeight(30.0),
+        //   child: Expanded(
+        //     child: Padding(
+        //       padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+        //       child: TextField(
+        //         decoration: InputDecoration(
+        //           contentPadding: EdgeInsets.all(5),
+        //           prefixIcon: Icon(Icons.search),
+        //           hintText: "Search here...",
+        //           border: OutlineInputBorder(),
+        //           filled: true,
+        //           fillColor: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ),
       drawer: Drawer(
         child: ListView(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/models/product.dart';
 import 'package:fruits_farms/pages/detailpage.dart';
 import 'package:provider/provider.dart';
@@ -24,10 +25,12 @@ class _FruitsListState extends State<FruitsList> {
           return FruitList(
             id: proData[index].id,
             name: proData[index].name,
-            category: proData[index].category,
-            image: proData[index].image,
-            price: proData[index].price,
             description: proData[index].description,
+            type: proData[index].type,
+            image: proData[index].image,
+            unit: proData[index].unit,
+            category: proData[index].category,
+            price: proData[index].price,
             qty: proData[index].qty,
           );
         },
@@ -37,37 +40,31 @@ class _FruitsListState extends State<FruitsList> {
 }
 
 class FruitList extends StatefulWidget {
-  final String id, name, category, description, grade, image;
+  final String id, name, description, type, image, unit, category;
   final int qty, price;
 
   FruitList(
-      {this.id,
+      {Key key,
+      this.id,
       this.name,
-      this.category,
       this.description,
-      this.grade,
+      this.type,
       this.image,
+      this.unit,
+      this.category,
       this.price,
-      this.qty});
-
+      this.qty})
+      : super(key: key);
   @override
   _FruitListState createState() => _FruitListState();
 }
 
 class _FruitListState extends State<FruitList> {
-  bool _isVisible = true;
-
-  void showToast() {
-    setState(() {
-      _isVisible = !_isVisible;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Container(
-      padding: EdgeInsets.all(2),
-      height: 140,
+      height: 120,
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: GestureDetector(
@@ -79,72 +76,66 @@ class _FruitListState extends State<FruitList> {
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                width: 125,
-                child: Image.asset(widget.image, fit: BoxFit.contain),
+                width: 130,
+                child: Image.asset(widget.image, fit: BoxFit.cover),
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: EdgeInsets.only(left: 5, right: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text(widget.name,
+                      Text(widget.name + " " + " " + widget.type,
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      // Text("Price: " + this.price.toString()),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.only(left: 10),
-                            // height: 15,
-                            width: 190,
-                            child: DropdownButton(
-                              isExpanded: true,
-                              disabledHint: Text(widget.qty.toString()),
-                              items: null,
-                              onChanged: null,
-                            ),
+                          Text(
+                            widget.unit,
                           ),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            "Mrp: " + widget.price.toString(),
-                            style: TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                color: Colors.red,
-                                fontSize: 13),
-                          ),
-                          Visibility(
-                            visible: _isVisible,
-                            child: OutlineButton(
-                              borderSide: BorderSide(color: Colors.green),
-                              textColor: Colors.green,
-                              child: Text("Add"),
-                              onPressed: showToast,
+                          Text("Price: " + widget.price.toString()),
+                          if (cart.items.containsKey(widget.id))
+                            MaterialButton(
+                              minWidth: 70,
+                              color: Colors.red[400],
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  content: Text('Item Removed from Cart'),
+                                ));
+                                cart.removeItem(widget.id);
+                              },
+                              child: Text(
+                                "Remove",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          else
+                            MaterialButton(
+                              minWidth: 70,
+                              color: Colors.lightGreen,
+                              onPressed: () {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  content: Text('Item Added to Cart'),
+                                ));
+                                cart.addItem(
+                                    widget.id,
+                                    widget.name,
+                                    widget.price,
+                                    widget.image,
+                                    widget.type,
+                                    widget.unit,
+                                    widget.qty);
+                              },
+                              child: Text('Add'),
                             ),
-                            replacement: Row(
-                              children: <Widget>[
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.remove_circle,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: null,
-                                ),
-                                Text("1"),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.add_circle,
-                                    color: Colors.green,
-                                  ),
-                                  onPressed: null,
-                                )
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ],

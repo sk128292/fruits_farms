@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_farms/models/cart.dart';
+import 'package:fruits_farms/pages/checkoutpage.dart';
 import 'package:fruits_farms/pages/view_page.dart';
 import 'package:fruits_farms/widgets/cart_items.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,10 @@ class _CartPageState extends State<CartPage> {
                     Expanded(
                       child: MaterialButton(
                         color: Colors.orange[500],
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Checkout()));
+                        },
                         child: Text(
                           "Checkout",
                           style: TextStyle(color: Colors.white),
