@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:fruits_farms/pages/fruitspage.dart';
+import 'package:fruits_farms/pages/test_page.dart';
 import 'package:fruits_farms/pages/vegetablepage.dart';
 import 'package:fruits_farms/widgets/ad.dart';
 import 'package:fruits_farms/widgets/homepage/apple.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Advertise(),
+            TestScreen(),
             Container(
               height: 190,
               child: Carousel(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruits_farms/models/cart.dart';
 import 'package:fruits_farms/pages/cartpage.dart';
 import 'package:fruits_farms/pages/homepage.dart';
+import 'package:fruits_farms/provider/user.dart';
 import 'package:provider/provider.dart';
 
 class ViewPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class ViewPage extends StatefulWidget {
 class _ViewPageState extends State<ViewPage> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
@@ -87,8 +89,11 @@ class _ViewPageState extends State<ViewPage> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text("Sandeep Kumar"),
-              accountEmail: Text("sk128292@gmail.com"),
+              accountName:
+                  Text(userProvider.userModel?.name ?? "username lading..."),
+              accountEmail: Text(
+                userProvider.userModel?.email ?? "email loading...",
+              ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text('SK'),

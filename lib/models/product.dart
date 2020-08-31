@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
   final String id, name, category, description, type, image, unit;

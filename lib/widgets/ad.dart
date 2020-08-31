@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Advertise extends StatelessWidget {
   const Advertise({Key key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,9 +16,7 @@ class Advertise extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: AssetImage("assets/a.jpg"),
-                fit: BoxFit.fill
-              ),
+                  image: AssetImage("assets/a.jpg"), fit: BoxFit.fill),
             ),
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -44,10 +42,18 @@ class Advertise extends StatelessWidget {
                     Expanded(
                       child: RichText(
                         text: TextSpan(
-                          style: TextStyle(color: Colors.white,),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                           children: [
-                            TextSpan(text: "Grab It \n", style: TextStyle(fontSize: 16),),
-                            TextSpan(text: "Best Taste In City", style: TextStyle(fontSize: 25),),
+                            TextSpan(
+                              text: "Grab It \n",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            TextSpan(
+                              text: "Best Taste In City",
+                              style: TextStyle(fontSize: 25),
+                            ),
                           ],
                         ),
                       ),
