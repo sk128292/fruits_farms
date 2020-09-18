@@ -12,8 +12,6 @@ class UserProvider with ChangeNotifier {
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
   UserServices _userServices = UserServices();
-  // OrderServices _orderServices = OrderServices();
-
   UserModel _userModel;
 
 //  getter
@@ -22,9 +20,6 @@ class UserProvider with ChangeNotifier {
   Status get status => _status;
 
   FirebaseUser get user => _user;
-
-  // public variables
-  // List<OrderModel> orders = [];
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
@@ -55,7 +50,7 @@ class UserProvider with ChangeNotifier {
           'name': name,
           'email': email,
           'uid': user.user.uid,
-          // 'stripeId': ''
+          'stripeId': ''
         });
       });
       return true;

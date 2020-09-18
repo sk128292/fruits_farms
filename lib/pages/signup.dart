@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_farms/helpers/common.dart';
 import 'package:fruits_farms/helpers/style.dart';
-import 'package:fruits_farms/pages/homepage.dart';
+// import 'package:fruits_farms/pages/homepage.dart';
+import 'package:fruits_farms/pages/view_page.dart';
 import 'package:fruits_farms/provider/user.dart';
 import 'package:fruits_farms/widgets/loading.dart';
 import 'package:provider/provider.dart';
@@ -175,7 +176,7 @@ class _SignUpState extends State<SignUp> {
                                           return;
                                         }
                                         changeScreenReplacement(
-                                            context, HomePage());
+                                            context, ViewPage());
                                       }
                                     },
                                     minWidth: MediaQuery.of(context).size.width,

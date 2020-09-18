@@ -10,7 +10,7 @@ class Splash extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Loading()],
+            children: <Widget>[Text('Please Wait ! '), Loading()],
           ),
         ],
       ),
