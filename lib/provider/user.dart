@@ -1,4 +1,5 @@
 // import 'dart:async';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -11,6 +12,7 @@
 //   FirebaseAuth _auth;
 //   FirebaseUser _user;
 //   Status _status = Status.Uninitialized;
+//   Firestore _firestore = Firestore.instance;
 //   UserServices _userServices = UserServices();
 //   UserModel _userModel;
 
@@ -21,15 +23,22 @@
 
 //   FirebaseUser get user => _user;
 
+//   final formkey = GlobalKey<FormState>();
+
+//   TextEditingController email = TextEditingController();
+//   TextEditingController password = TextEditingController();
+//   TextEditingController name = TextEditingController();
+
 //   UserProvider.initialize() : _auth = FirebaseAuth.instance {
 //     _auth.onAuthStateChanged.listen(_onStateChanged);
 //   }
 
-//   Future<bool> signIn(String email, String password) async {
+//   Future<bool> signIn() async {
 //     try {
 //       _status = Status.Authenticating;
 //       notifyListeners();
-//       await _auth.signInWithEmailAndPassword(email: email, password: password);
+//       await _auth.signInWithEmailAndPassword(
+//           email: email.text.trim(), password: password.text.trim());
 //       return true;
 //     } catch (e) {
 //       _status = Status.Unauthenticated;
@@ -39,18 +48,18 @@
 //     }
 //   }
 
-//   Future<bool> signUp(String name, String email, String password) async {
+//   Future<bool> signUp() async {
 //     try {
 //       _status = Status.Authenticating;
 //       notifyListeners();
 //       await _auth
-//           .createUserWithEmailAndPassword(email: email, password: password)
-//           .then((user) {
-//         _userServices.createUser({
-//           'name': name,
-//           'email': email,
-//           'uid': user.user.uid,
-//           'stripeId': ''
+//           .createUserWithEmailAndPassword(
+//               email: email.text.trim(), password: password.text.trim())
+//           .then((result) {
+//         _firestore.collection('users').document(result.user.uid).setData({
+//           'name': name.text,
+//           'email': email.text,
+//           'uid': result.user.uid,
 //         });
 //       });
 //       return true;
@@ -69,13 +78,24 @@
 //     return Future.delayed(Duration.zero);
 //   }
 
-//   Future<void> _onStateChanged(FirebaseUser user) async {
-//     if (user == null) {
+//   void clearController() {
+//     name.text = "";
+//     password.text = "";
+//     email.text = "";
+//   }
+
+//   Future<void> reloadUserModel() async {
+//     _userModel = await _userServices.getUserById(user.uid);
+//     notifyListeners();
+//   }
+
+//   Future<void> _onStateChanged(FirebaseUser firebaseUser) async {
+//     if (firebaseUser == null) {
 //       _status = Status.Unauthenticated;
 //     } else {
-//       _user = user;
-//       _userModel = await _userServices.getUserById(user.uid);
+//       _user = firebaseUser;
 //       _status = Status.Authenticated;
+//       _userModel = await _userServices.getUserById(user.uid);
 //     }
 //     notifyListeners();
 //   }
@@ -126,9 +146,4 @@
 //   //   orders = await _orderServices.getUserOrders(userId: _user.uid);
 //   //   notifyListeners();
 //   // }
-
-//   Future<void> reloadUserModel() async {
-//     _userModel = await _userServices.getUserById(user.uid);
-//     notifyListeners();
-//   }
 // }

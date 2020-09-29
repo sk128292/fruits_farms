@@ -88,9 +88,7 @@ class _ViewPageState extends State<ViewPage> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text("username lading..."),
-              accountEmail: Text(
-                "email loading...",
-              ),
+              accountEmail: Text("email loading..."),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text('SK'),
@@ -117,9 +115,11 @@ class _ViewPageState extends State<ViewPage> {
               onTap: () {},
             ),
             ListTile(
-              title: Text('Login'),
+              title: Text('Logout'),
               leading: Icon(Icons.settings_power),
-              onTap: () {},
+              onTap: () {
+                // AuthService().signOut();
+              },
             ),
           ],
         ),

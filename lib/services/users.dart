@@ -3,11 +3,16 @@
 // import 'package:fruits_farms/models/user.dart';
 
 // class UserServices {
-//   Firestore _firestore = Firestore.instance;
 //   String collection = "users";
+//   Firestore _firestore = Firestore.instance;
 
-//   void createUser(Map data) {
-//     _firestore.collection(collection).document(data["uid"]).setData(data);
+//   void createUser(Map<String, dynamic> values) {
+//     String id = values["id"];
+//     _firestore.collection(collection).document(id).setData(values);
+//   }
+
+//   void updateUserData(Map<String, dynamic> values) {
+//     _firestore.collection(collection).document(values['id']).updateData(values);
 //   }
 
 //   Future<UserModel> getUserById(String id) =>

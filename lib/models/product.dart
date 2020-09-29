@@ -1,3 +1,48 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
+// class ProductModel {
+//   static const ID = "id";
+//   static const NAME = "name";
+//   static const CATEGORY = "category";
+//   static const DETAILNAME = "detailName";
+//   static const DESCRIPTION = "description";
+//   static const UNIT = "unit";
+//   static const IMAGE = "id";
+//   static const PRICE = "id";
+//   static const QTY = "id";
+
+//   String _id;
+//   String _name;
+//   String _category;
+//   String _detailName;
+//   String _description;
+//   String _unit;
+//   String _image;
+//   double _price;
+//   int _qty;
+
+//   String get id => _id;
+//   String get name => _name;
+//   String get category => _category;
+//   String get detailName => _detailName;
+//   String get description => _description;
+//   String get unit => _unit;
+//   String get image => _image;
+//   double get price => _price;
+//   int get qty => _qty;
+
+//   ProductModel.fromSnapshot(DocumentSnapshot snapshot) {
+//     _id = snapshot.data[ID];
+//     _name = snapshot.data[NAME];
+//     _category = snapshot.data[CATEGORY];
+//     _detailName = snapshot.data[DETAILNAME];
+//     _description = snapshot.data[DESCRIPTION];
+//     _unit = snapshot.data[UNIT];
+//     _image = snapshot.data[IMAGE];
+//     _price = snapshot.data[PRICE];
+//     _qty = snapshot.data[QTY];
+//   }
+// }
 import 'package:flutter/material.dart';
 
 class Product with ChangeNotifier {
