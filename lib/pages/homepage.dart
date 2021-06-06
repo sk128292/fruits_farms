@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Advertise(),
-            TestScreen(),
+            // TestScreen(),
             Container(
               height: 190,
               child: Carousel(
